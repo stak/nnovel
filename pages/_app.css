@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "GameFont";
+  src: url("/fonts/k8x12L.ttf");
+}
+
 body {
   padding: 0;
   margin: 0;
