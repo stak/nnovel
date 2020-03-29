@@ -12,7 +12,7 @@ type Props = {
 const ALPHA_DEFAULT = 0.7
 const ALPHA_HOVER = 1.0
 
-const Button: NextComponentType<NextPageContext, {}, Props> = ({
+export const Button: NextComponentType<NextPageContext, {}, Props> = ({
   x,
   y,
   image,
@@ -37,5 +37,3 @@ const Button: NextComponentType<NextPageContext, {}, Props> = ({
     />
   )
 }
-
-export default Button

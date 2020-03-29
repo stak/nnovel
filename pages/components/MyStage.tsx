@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Stage } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
-import MyContainer from './MyContainer'
-import Button from './Button'
+import { MyContainer } from './MyContainer'
+import { Button } from './Button'
 
 const stageOption = {
   width: 800,
@@ -13,11 +13,13 @@ const stageOption = {
 }
 
 type Props = {}
+
 const MyStage: NextComponentType<NextPageContext, {}, Props> = () => {
   const bgLayer = { src: '/img/bg1.png', x: 0, y: 0 }
   const arieLayer = { src: '/img/arie.png', x: 100, y: 0 }
-  const arie2Layer = { src: '/img/arie.png', x: 100, y: 0 }
+  // const arie2Layer = { src: '/img/arie.png', x: 200, y: 0 }
   const [layers, setLayers] = useState([bgLayer, arieLayer])
+  const [toggle, setToggle] = useState(false)
 
   return (
     <Stage options={stageOption}>
@@ -27,11 +29,12 @@ const MyStage: NextComponentType<NextPageContext, {}, Props> = () => {
         x={0}
         y={530}
         onClick={() => {
-          if (layers[1].src === arieLayer.src) {
-            setLayers([bgLayer, arie2Layer])
-          } else {
+          if (toggle) {
             setLayers([bgLayer, arieLayer])
+          } else {
+            setLayers([bgLayer, { ...arieLayer, x: 300 }])
           }
+          setToggle(!toggle)
         }}
       />
     </Stage>

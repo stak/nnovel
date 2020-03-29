@@ -1,27 +1,26 @@
 import React from 'react'
-import { Container, Sprite } from '@inlet/react-pixi'
+import { Container } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
+import { Layer } from './Layer'
 
-type Layer = {
+type LayerProp = {
   src: string
   x: number
   y: number
 }
 
 type Props = {
-  layers: Layer[]
+  layers: LayerProp[]
 }
 
-const MyContainer: NextComponentType<NextPageContext, {}, Props> = ({
+export const MyContainer: NextComponentType<NextPageContext, {}, Props> = ({
   layers,
 }) => {
   return (
     <Container>
       {layers.map((layer) => (
-        <Sprite key={layer.src} image={layer.src} x={layer.x} y={layer.y} />
+        <Layer key={layer.src} src={layer.src} x={layer.x} y={layer.y} />
       ))}
     </Container>
   )
 }
-
-export default MyContainer
