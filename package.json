@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@inlet/react-pixi": "^1.2.8",
     "next": "^9.3.2",
+    "pixi.js": "^5.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },

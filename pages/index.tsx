@@ -1,13 +1,12 @@
 import React from 'react'
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 
-const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-  <h1>Hello world! - user agent: {userAgent}</h1>
-)
+const MyStageNoSSR = dynamic(() => import('./components/MyStage'), {
+  ssr: false,
+})
 
-Home.getInitialProps = async ({ req }) => {
-  const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent
-  return { userAgent }
-}
+type Props = {}
+const Home: NextPage<Props> = () => <MyStageNoSSR />
 
 export default Home
