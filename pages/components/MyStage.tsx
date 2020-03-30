@@ -25,7 +25,7 @@ const MyStage: NextComponentType<NextPageContext, {}, Props> = () => {
   return (
     <Stage options={stageOption}>
       <MyContainer layers={layers} />
-      <MyText text="そんなこと、言わないでよね。" x={130} y={450} />
+      <MyText text={'そんなこと、言わないでよね。'} x={130} y={450} />
       <Button
         image="/img/emo17_02.png"
         x={0}

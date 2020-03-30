@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { NextComponentType, NextPageContext } from 'next'
-import { Text } from '@inlet/react-pixi'
+import { Text, Graphics } from '@inlet/react-pixi'
 import * as PIXI from 'pixi.js'
 
 type Props = {
@@ -13,15 +13,13 @@ type Props = {
 PIXI.TextMetrics.BASELINE_SYMBOL += 'あ'
 
 const style = new PIXI.TextStyle({
-  fontFamily: 'GameFont',
-  fontSize: 32,
+  fontFamily: 'Meiryo',
+  fontSize: 30,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fill: ['#ffffff', '#99aacc'], // gradient
-  stroke: '#4a1850',
+  fill: ['#dddddd', '#8877aa'], // gradient
+  stroke: '#4a2840',
   strokeThickness: 3,
-  wordWrap: true,
-  wordWrapWidth: 440,
   letterSpacing: 1,
 })
 
@@ -30,11 +28,18 @@ export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
   y,
   text,
 }) => {
-  const [renderable, setRenderable] = useState(false)
-  useEffect(() => {
-    setTimeout(() => {
-      setRenderable(true)
-    }, 100)
-  }, [])
-  return renderable ? <Text style={style} x={x} y={y} text={text} /> : null
+  return (
+    <>
+      <Graphics
+        draw={(g) => {
+          g.clear()
+          g.lineStyle(0, 0xffffff, 0.55)
+          g.beginFill(0xffffff, 0.8)
+          g.drawRoundedRect(110, 445, 640, 140, 15)
+          g.endFill()
+        }}
+      />
+      <Text style={style} x={x} y={y} text={text} />
+    </>
+  )
 }
