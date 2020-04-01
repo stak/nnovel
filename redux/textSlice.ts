@@ -10,20 +10,20 @@ export const textSlice = createSlice({
 
   initialState: {
     history: [],
-    current: '',
+    current: '初期状態',
   } as SliceState,
 
   reducers: {
-    next(state, action: PayloadAction<string>) {
+    setText(state, action: PayloadAction<string>) {
       state.history.push(state.current)
       state.current = action.payload
     },
-    append(state, action: PayloadAction<string>) {
+    appendText(state, action: PayloadAction<string>) {
       state.current += action.payload
     },
   },
 })
 
-export const { next, append } = textSlice.actions
+export const { setText, appendText } = textSlice.actions
 
 export default textSlice.reducer

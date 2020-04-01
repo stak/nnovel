@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Stage } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
-import { MyContainer } from './MyContainer'
-import { Button } from './Button'
+import { useSelector, useDispatch } from 'react-redux'
 import { MyText } from './MyText'
+import { Button } from './Button'
+import { setText } from '../../redux/textSlice'
+import { RootState } from '../../redux/rootReducer'
 
 const stageOption = {
   width: 800,
@@ -13,30 +15,29 @@ const stageOption = {
   sharedTicker: false,
 }
 
+const sampleTexts = [
+  'むかしむかし、あるところにーー',
+  'いやそういう問題ではない。',
+  '何が起こっているのかを明確にせよ。\nそして、自身に問うのだ。',
+  '果たしてこれは、お前の望んだ結末なのか？　と。',
+]
+let i = 0
+
 type Props = {}
 
 const Game: NextComponentType<NextPageContext, {}, Props> = () => {
-  const bgLayer = { src: '/img/bg1.png', x: 0, y: 0 }
-  const arieLayer = { src: '/img/arie.png', x: 100, y: 0 }
-  // const arie2Layer = { src: '/img/arie.png', x: 200, y: 0 }
-  const [layers, setLayers] = useState([bgLayer, arieLayer])
-  const [toggle, setToggle] = useState(false)
+  const text = useSelector((state: RootState) => state.text.current)
+  const dispatch = useDispatch()
 
   return (
     <Stage options={stageOption}>
-      <MyContainer layers={layers} />
-      <MyText text={'そんなこと、言わないでよね。'} x={130} y={450} />
+      <MyText text={text} x={130} y={450} />
       <Button
         image="/img/emo17_02.png"
         x={0}
         y={530}
         onClick={() => {
-          if (toggle) {
-            setLayers([bgLayer, arieLayer])
-          } else {
-            setLayers([bgLayer, { ...arieLayer, x: 300 }])
-          }
-          setToggle(!toggle)
+          dispatch(setText(sampleTexts[i++]))
         }}
       />
     </Stage>
