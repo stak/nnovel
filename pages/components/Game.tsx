@@ -15,7 +15,7 @@ const stageOption = {
 
 type Props = {}
 
-const MyStage: NextComponentType<NextPageContext, {}, Props> = () => {
+const Game: NextComponentType<NextPageContext, {}, Props> = () => {
   const bgLayer = { src: '/img/bg1.png', x: 0, y: 0 }
   const arieLayer = { src: '/img/arie.png', x: 100, y: 0 }
   // const arie2Layer = { src: '/img/arie.png', x: 200, y: 0 }
@@ -43,4 +43,4 @@ const MyStage: NextComponentType<NextPageContext, {}, Props> = () => {
   )
 }
 
-export default MyStage
+export default Game
