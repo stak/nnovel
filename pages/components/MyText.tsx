@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
-import { Text, Graphics } from '@inlet/react-pixi'
+import { Text, Graphics, useTick } from '@inlet/react-pixi'
 import * as PIXI from 'pixi.js'
+import { sleep } from './utils'
 
 type Props = {
   x: number
   y: number
   text: string
+  onComplete: () => void
 }
 
 // workaround to fix japanese chars height
@@ -22,12 +24,34 @@ const style = new PIXI.TextStyle({
   strokeThickness: 3,
   letterSpacing: 1,
 })
+const TEXT_SPEED = 10 // 一秒に n 文字
+const FPS = 60
 
 export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
   x,
   y,
   text,
+  onComplete,
 }) => {
+  const [drawLength, setDrawLength] = useState(0)
+  const iter = useRef(0)
+
+  useTick((delta) => {
+    iter.current += delta || 0
+    let add = 0
+    while (iter.current >= FPS / TEXT_SPEED) {
+      iter.current -= FPS / TEXT_SPEED
+      add += 1
+    }
+    if (drawLength < text.length) {
+      if (add) {
+        setDrawLength(drawLength + add)
+      }
+    } else {
+      onComplete()
+    }
+  })
+
   return (
     <>
       <Graphics
@@ -39,7 +63,7 @@ export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
           g.endFill()
         }}
       />
-      <Text style={style} x={x} y={y} text={text} />
+      <Text style={style} x={x} y={y} text={text.slice(0, drawLength)} />
     </>
   )
 }
