@@ -1,16 +1,7 @@
 import React from 'react'
-import { Stage } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 import { ScriptRunner } from './ScriptRunner'
 import { Command } from '../../redux/scriptSlice'
-
-const stageOption = {
-  width: 800,
-  height: 600,
-  transparent: true,
-  antialias: false,
-  sharedTicker: false,
-}
 
 const sampleCmds: Command[] = [
   {
@@ -46,11 +37,7 @@ const sampleCmds: Command[] = [
 type Props = {}
 
 const Game: NextComponentType<NextPageContext, {}, Props> = () => {
-  return (
-    <Stage options={stageOption}>
-      <ScriptRunner script={sampleCmds} />
-    </Stage>
-  )
+  return <ScriptRunner script={sampleCmds} />
 }
 
 export default Game

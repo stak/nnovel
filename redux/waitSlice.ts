@@ -23,9 +23,12 @@ export const waitSlice = createSlice({
     waitClick(state) {
       state.waitType = waitType.Click
     },
+    waitDone(state) {
+      state.waitType = waitType.None
+    },
   },
 })
 
-export const { waitClick } = waitSlice.actions
+export const { waitClick, waitDone } = waitSlice.actions
 
 export default waitSlice.reducer

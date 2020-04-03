@@ -14,12 +14,12 @@ export const textSlice = createSlice({
   } as SliceState,
 
   reducers: {
-    setText(state, action: PayloadAction<string>) {
+    setText(state, action: PayloadAction<Array<string>>) {
       state.history.push(state.current)
-      state.current = action.payload
+      state.current = action.payload[0]
     },
-    appendText(state, action: PayloadAction<string>) {
-      state.current += action.payload
+    appendText(state, action: PayloadAction<Array<string>>) {
+      state.current += action.payload[0]
     },
   },
 })

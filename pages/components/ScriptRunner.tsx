@@ -18,20 +18,25 @@ export const ScriptRunner: NextComponentType<NextPageContext, {}, Props> = ({
   )
   const dispatch = useDispatch()
   const next = () => {
-    dispatch(execScript)
+    dispatch(execScript())
   }
   useEffect(() => {
     dispatch(startScript(script))
-    next()
   }, [script])
 
-  if (currentCommand) {
-    if (Object.keys(commandActions).includes(currentCommand.name)) {
-      const cmd = commandActions[currentCommand.name]
-      const args = currentCommand.args
-      dispatch(cmd(args))
+  useEffect(() => {
+    console.log('Runner')
+    if (currentCommand) {
+      if (Object.keys(commandActions).includes(currentCommand.name)) {
+        const cmd = commandActions[currentCommand.name]
+        const args = currentCommand.args
+        dispatch(cmd(args))
+      } else {
+        console.log(Object.keys(commandActions))
+        throw new Error('invalid command')
+      }
     }
-  }
+  }, undefined)
 
   return <ScriptStage next={next} />
 }

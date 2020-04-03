@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { Text, Graphics, useTick } from '@inlet/react-pixi'
 import * as PIXI from 'pixi.js'
@@ -36,6 +36,17 @@ export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
   const [drawLength, setDrawLength] = useState(0)
   const iter = useRef(0)
 
+  useEffect(() => {
+    setDrawLength(0)
+  }, [text])
+
+  useEffect(() => {
+    if (drawLength >= text.length) {
+      console.log(text, drawLength)
+      onComplete()
+    }
+  }, [drawLength])
+
   useTick((delta) => {
     iter.current += delta || 0
     let add = 0
@@ -47,8 +58,6 @@ export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
       if (add) {
         setDrawLength(drawLength + add)
       }
-    } else {
-      onComplete()
     }
   })
 
