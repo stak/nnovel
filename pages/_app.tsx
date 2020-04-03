@@ -1,9 +1,11 @@
 import React from 'react'
 import App, { AppInitialProps, AppContext } from 'next/app'
 import { Provider } from 'react-redux'
-import withRedux, { ReduxWrapperAppProps } from 'next-redux-wrapper'
+import { ReduxWrapperAppProps } from 'next-redux-wrapper'
 import { setupStore } from '../redux/store'
 import './_app.css'
+
+const store = setupStore()
 
 interface MyAppProps extends AppInitialProps, ReduxWrapperAppProps {}
 
@@ -17,7 +19,7 @@ class MyApp extends App<MyAppProps> {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props
+    const { Component, pageProps } = this.props
     return (
       <Provider store={store}>
         <Component {...pageProps} />
@@ -26,9 +28,4 @@ class MyApp extends App<MyAppProps> {
   }
 }
 
-export default withRedux(
-  () => {
-    return setupStore()
-  },
-  { debug: true }
-)(MyApp)
+export default MyApp
