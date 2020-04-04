@@ -5,6 +5,7 @@ import { Stage, Container } from '@inlet/react-pixi'
 
 import { NNText } from './NNText'
 import { NNLayer } from './NNLayer'
+import { NNTimer } from './NNTimer'
 import { RootState } from '../../redux/rootReducer'
 import { waitDone } from '../../redux/waitSlice'
 
@@ -70,6 +71,17 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
           }}
         />
       </Container>
+
+      {state.wait.waitType === 'time' && (
+        <NNTimer
+          time={state.wait.time}
+          onComplete={() => {
+            console.log('onTimerComplete')
+            dispatch(waitDone())
+            next()
+          }}
+        />
+      )}
     </Stage>
   )
 }

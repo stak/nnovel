@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // Enum
 const waitType = {
@@ -11,6 +11,7 @@ type WaitType = typeof waitType[keyof typeof waitType]
 
 type SliceState = {
   waitType: WaitType
+  time: number
 }
 
 export const waitSlice = createSlice({
@@ -18,6 +19,7 @@ export const waitSlice = createSlice({
 
   initialState: {
     waitType: waitType.None,
+    time: 0,
   } as SliceState,
 
   reducers: {
@@ -27,12 +29,16 @@ export const waitSlice = createSlice({
     waitText(state) {
       state.waitType = waitType.Text
     },
+    waitTime(state, action: PayloadAction<number[]>) {
+      state.time = action.payload[0]
+      state.waitType = waitType.Time
+    },
     waitDone(state) {
       state.waitType = waitType.None
     },
   },
 })
 
-export const { waitClick, waitText, waitDone } = waitSlice.actions
+export const { waitClick, waitText, waitTime, waitDone } = waitSlice.actions
 
 export default waitSlice.reducer

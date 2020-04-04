@@ -6,7 +6,15 @@ import { Command } from '../../redux/scriptSlice'
 const sampleCmds: Command[] = [
   {
     name: 'setText',
-    args: ['むかしむかし、あるところに――'],
+    args: ['むかしむかし、'],
+  },
+  {
+    name: 'waitTime',
+    args: [1000],
+  },
+  {
+    name: 'appendText',
+    args: ['あるところに――'],
   },
   {
     name: 'waitText',

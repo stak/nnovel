@@ -19,7 +19,7 @@ const style = new PIXI.TextStyle({
   fontSize: 30,
   fontStyle: 'normal',
   fontWeight: 'bold',
-  fill: ['#dddddd', '#8877aa'], // gradient
+  fill: ['#eedddd', '#8877aa'], // gradient
   stroke: '#4a2840',
   strokeThickness: 3,
   letterSpacing: 1,
