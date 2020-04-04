@@ -5,6 +5,7 @@ const waitType = {
   None: 'none',
   Click: 'click',
   Time: 'time',
+  Text: 'text',
 } as const
 type WaitType = typeof waitType[keyof typeof waitType]
 
@@ -23,12 +24,15 @@ export const waitSlice = createSlice({
     waitClick(state) {
       state.waitType = waitType.Click
     },
+    waitText(state) {
+      state.waitType = waitType.Text
+    },
     waitDone(state) {
       state.waitType = waitType.None
     },
   },
 })
 
-export const { waitClick, waitDone } = waitSlice.actions
+export const { waitClick, waitText, waitDone } = waitSlice.actions
 
 export default waitSlice.reducer

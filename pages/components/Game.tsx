@@ -6,15 +6,27 @@ import { Command } from '../../redux/scriptSlice'
 const sampleCmds: Command[] = [
   {
     name: 'setText',
-    args: ['むかしむかし、あるところにーー'],
+    args: ['むかしむかし、あるところに――'],
+  },
+  {
+    name: 'waitText',
+    args: [],
   },
   {
     name: 'waitClick',
     args: [],
   },
   {
+    name: 'showBg',
+    args: ['/img/bg1.png'],
+  },
+  {
     name: 'setText',
     args: ['いやそういう問題ではない。'],
+  },
+  {
+    name: 'waitText',
+    args: [],
   },
   {
     name: 'waitClick',
@@ -25,6 +37,10 @@ const sampleCmds: Command[] = [
     args: ['何が起こっているのかを明確にせよ。'],
   },
   {
+    name: 'waitText',
+    args: [],
+  },
+  {
     name: 'waitClick',
     args: [],
   },
@@ -33,12 +49,20 @@ const sampleCmds: Command[] = [
     args: ['\nそして、自身に問うのだ。'],
   },
   {
+    name: 'waitText',
+    args: [],
+  },
+  {
     name: 'waitClick',
     args: [],
   },
   {
     name: 'setText',
     args: ['果たしてこれは、お前の望んだ結末なのか？'],
+  },
+  {
+    name: 'waitText',
+    args: [],
   },
 ]
 

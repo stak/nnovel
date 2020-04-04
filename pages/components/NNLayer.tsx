@@ -14,7 +14,7 @@ const AnimatedSprite = animated(Sprite)
 
 type Props = LayerProp
 
-export const Layer: NextComponentType<NextPageContext, {}, Props> = ({
+export const NNLayer: NextComponentType<NextPageContext, {}, Props> = ({
   src,
   x,
   y,

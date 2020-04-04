@@ -1,14 +1,16 @@
-import { ActionCreator } from '@reduxjs/toolkit'
+import { ActionCreator, Action } from '@reduxjs/toolkit'
 import { textSlice } from './textSlice'
 import { scriptSlice } from './scriptSlice'
 import { waitSlice } from './waitSlice'
+import { layerSlice } from './layerSlice'
 
-export type CommandActions = {
-  [key: string]: ActionCreator<any>
+export type CommandActionCreators = {
+  [key: string]: ActionCreator<Action<string>>
 }
 
-export const commandActions: CommandActions = {
+export const commandActionCreators: CommandActionCreators = {
   ...textSlice.actions,
   ...scriptSlice.actions,
   ...waitSlice.actions,
+  ...layerSlice.actions,
 }

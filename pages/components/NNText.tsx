@@ -84,7 +84,7 @@ export const NNText: NextComponentType<NextPageContext, {}, Props> = ({
             g.clear()
             g.lineStyle(0, 0xffffff, 0.55)
             g.beginFill(0x888888, 0.8)
-            g.drawRoundedRect(740, 545, 30, 30, 5)
+            g.drawRoundedRect(710, 545, 30, 30, 5)
             g.endFill()
           }}
         />

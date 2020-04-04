@@ -1,9 +1,11 @@
 import React from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useSelector, useDispatch } from 'react-redux'
+import { Stage, Container } from '@inlet/react-pixi'
+
 import { NNText } from './NNText'
+import { NNLayer } from './NNLayer'
 import { RootState } from '../../redux/rootReducer'
-import { Stage } from '@inlet/react-pixi'
 import { waitDone } from '../../redux/waitSlice'
 
 const stageOption = {
@@ -38,16 +40,36 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
         event.preventDefault()
       }}
     >
-      <NNText
-        text={state.text.current}
-        updateType={state.text.updateType}
-        x={130}
-        y={450}
-        onComplete={() => {
-          console.log('onTextComplete')
-          next()
-        }}
-      />
+      <Container>
+        {state.layer.fore.base && (
+          <NNLayer
+            src={state.layer.fore.base.src}
+            x={state.layer.fore.base.x}
+            y={state.layer.fore.base.y}
+          />
+        )}
+        {state.layer.fore.layers.map((layer, i) => (
+          <NNLayer
+            key={`fore.layers[${i}]`}
+            src={layer.src}
+            x={layer.x}
+            y={layer.y}
+          />
+        ))}
+        <NNText
+          text={state.text.current}
+          updateType={state.text.updateType}
+          x={130}
+          y={450}
+          onComplete={() => {
+            if (state.wait.waitType === 'text') {
+              console.log('onTextComplete')
+              dispatch(waitDone())
+              next()
+            }
+          }}
+        />
+      </Container>
     </Stage>
   )
 }

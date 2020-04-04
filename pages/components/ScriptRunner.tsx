@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Command, startScript, execScript } from '../../redux/scriptSlice'
+import { waitSlice } from '../../redux/waitSlice'
 import { RootState } from '../../redux/rootReducer'
-import { commandActions } from '../../redux/commandActions'
+import { commandActionCreators } from '../../redux/commandActions'
 import { NNStage } from './NNStage'
 
 type Props = {
@@ -30,12 +31,20 @@ export const ScriptRunner: NextComponentType<NextPageContext, {}, Props> = ({
   useEffect(() => {
     console.log('Run')
     if (nextCommand) {
-      if (Object.keys(commandActions).includes(nextCommand.name)) {
-        const cmd = commandActions[nextCommand.name]
+      if (Object.keys(commandActionCreators).includes(nextCommand.name)) {
+        const cmd = commandActionCreators[nextCommand.name]
         const args = nextCommand.args
-        dispatch(cmd(args))
+        const action = cmd(args)
+        dispatch(action)
+
+        if (action.type.split('/')[0] === waitSlice.name) {
+          // wait 系コマンド実行時、待ちに入る
+          // <NNStage> 下のコンポーネントが next を呼ぶことで継続する
+        } else {
+          next()
+        }
       } else {
-        console.log(Object.keys(commandActions))
+        console.log(Object.keys(commandActionCreators))
         throw new Error('invalid command: ' + nextCommand.name)
       }
     } else {
