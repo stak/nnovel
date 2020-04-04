@@ -34,6 +34,9 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
           next()
         }
       }}
+      onContextMenu={(event) => {
+        event.preventDefault()
+      }}
     >
       <NNText
         text={state.text.current}
