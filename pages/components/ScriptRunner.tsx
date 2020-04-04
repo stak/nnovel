@@ -13,28 +13,33 @@ type Props = {
 export const ScriptRunner: NextComponentType<NextPageContext, {}, Props> = ({
   script,
 }) => {
-  const currentCommand = useSelector(
+  const nextCommand = useSelector(
     (state: RootState) => state.script.commands[state.script.pos]
   )
   const dispatch = useDispatch()
   const next = () => {
     dispatch(execScript())
   }
+
+  // init
   useEffect(() => {
     dispatch(startScript(script))
   }, [script])
 
+  // main loop
   useEffect(() => {
-    console.log('Runner')
-    if (currentCommand) {
-      if (Object.keys(commandActions).includes(currentCommand.name)) {
-        const cmd = commandActions[currentCommand.name]
-        const args = currentCommand.args
+    console.log('Run')
+    if (nextCommand) {
+      if (Object.keys(commandActions).includes(nextCommand.name)) {
+        const cmd = commandActions[nextCommand.name]
+        const args = nextCommand.args
         dispatch(cmd(args))
       } else {
         console.log(Object.keys(commandActions))
-        throw new Error('invalid command')
+        throw new Error('invalid command: ' + nextCommand.name)
       }
+    } else {
+      console.log('--EOS--')
     }
   }, undefined)
 
