@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { Text, Graphics, useTick } from '@inlet/react-pixi'
 import * as PIXI from 'pixi.js'
-import { sleep } from './utils'
 
 type Props = {
   x: number
   y: number
   text: string
+  updateType: string
   onComplete: () => void
 }
 
@@ -24,25 +24,30 @@ const style = new PIXI.TextStyle({
   strokeThickness: 3,
   letterSpacing: 1,
 })
-const TEXT_SPEED = 10 // 一秒に n 文字
+const TEXT_SPEED = 20 // chars per second
 const FPS = 60
 
 export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
   x,
   y,
   text,
+  updateType,
   onComplete,
 }) => {
   const [drawLength, setDrawLength] = useState(0)
+  const [complete, setComplete] = useState(false)
   const iter = useRef(0)
 
   useEffect(() => {
-    setDrawLength(0)
+    if (updateType === 'set') {
+      setDrawLength(0)
+    }
+    setComplete(false)
   }, [text])
 
   useEffect(() => {
     if (drawLength >= text.length) {
-      console.log(text, drawLength)
+      setComplete(true)
       onComplete()
     }
   }, [drawLength])
@@ -73,6 +78,17 @@ export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
         }}
       />
       <Text style={style} x={x} y={y} text={text.slice(0, drawLength)} />
+      {complete && (
+        <Graphics
+          draw={(g) => {
+            g.clear()
+            g.lineStyle(0, 0xffffff, 0.55)
+            g.beginFill(0x888888, 0.8)
+            g.drawRoundedRect(740, 545, 30, 30, 5)
+            g.endFill()
+          }}
+        />
+      )}
     </>
   )
 }

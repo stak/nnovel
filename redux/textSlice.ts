@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 type SliceState = {
   history: string[]
   current: string
+  updateType: 'set' | 'append'
 }
 
 export const textSlice = createSlice({
@@ -11,15 +12,18 @@ export const textSlice = createSlice({
   initialState: {
     history: [],
     current: '初期状態',
+    updateType: 'set',
   } as SliceState,
 
   reducers: {
     setText(state, action: PayloadAction<Array<string>>) {
       state.history.push(state.current)
       state.current = action.payload[0]
+      state.updateType = 'set'
     },
     appendText(state, action: PayloadAction<Array<string>>) {
       state.current += action.payload[0]
+      state.updateType = 'append'
     },
   },
 })

@@ -27,6 +27,7 @@ const Game: NextComponentType<NextPageContext, {}, Props> = () => {
       <MyContainer layers={layers} />
       <MyText
         onComplete={() => void 0}
+        updateType="set"
         text={'そんなこと、言わないでよね。'}
         x={130}
         y={450}

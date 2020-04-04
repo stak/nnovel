@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { MyText } from './MyText'
 import { RootState } from '../../redux/rootReducer'
 import { Stage } from '@inlet/react-pixi'
-import { Button } from './Button'
 import { waitDone } from '../../redux/waitSlice'
 
 const stageOption = {
@@ -26,9 +25,19 @@ export const ScriptStage: NextComponentType<NextPageContext, {}, Props> = ({
   const dispatch = useDispatch()
 
   return (
-    <Stage options={stageOption}>
+    <Stage
+      options={stageOption}
+      onClick={() => {
+        if (state.wait.waitType === 'click') {
+          console.log('onClick')
+          dispatch(waitDone())
+          next()
+        }
+      }}
+    >
       <MyText
         text={state.text.current}
+        updateType={state.text.updateType}
         x={130}
         y={450}
         onComplete={() => {
@@ -36,18 +45,6 @@ export const ScriptStage: NextComponentType<NextPageContext, {}, Props> = ({
           next()
         }}
       />
-      {state.wait.waitType === 'click' ? (
-        <Button
-          image="/img/emo17_02.png"
-          x={0}
-          y={530}
-          onClick={() => {
-            console.log('onClick')
-            dispatch(waitDone())
-            next()
-          }}
-        />
-      ) : null}
     </Stage>
   )
 }

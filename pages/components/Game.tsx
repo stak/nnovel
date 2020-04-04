@@ -22,7 +22,15 @@ const sampleCmds: Command[] = [
   },
   {
     name: 'setText',
-    args: ['何が起こっているのかを明確にせよ。\nそして、自身に問うのだ。'],
+    args: ['何が起こっているのかを明確にせよ。'],
+  },
+  {
+    name: 'waitClick',
+    args: [],
+  },
+  {
+    name: 'appendText',
+    args: ['\nそして、自身に問うのだ。'],
   },
   {
     name: 'waitClick',
