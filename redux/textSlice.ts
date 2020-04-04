@@ -11,7 +11,7 @@ export const textSlice = createSlice({
 
   initialState: {
     history: [],
-    current: '初期状態',
+    current: '',
     updateType: 'set',
   } as SliceState,
 
