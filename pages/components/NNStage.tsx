@@ -1,7 +1,7 @@
 import React from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useSelector, useDispatch } from 'react-redux'
-import { MyText } from './MyText'
+import { NNText } from './NNText'
 import { RootState } from '../../redux/rootReducer'
 import { Stage } from '@inlet/react-pixi'
 import { waitDone } from '../../redux/waitSlice'
@@ -18,7 +18,7 @@ type Props = {
   next: () => void
 }
 
-export const ScriptStage: NextComponentType<NextPageContext, {}, Props> = ({
+export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
   next,
 }) => {
   const state = useSelector((state: RootState) => state)
@@ -35,7 +35,7 @@ export const ScriptStage: NextComponentType<NextPageContext, {}, Props> = ({
         }
       }}
     >
-      <MyText
+      <NNText
         text={state.text.current}
         updateType={state.text.updateType}
         x={130}

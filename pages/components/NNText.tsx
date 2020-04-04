@@ -27,7 +27,7 @@ const style = new PIXI.TextStyle({
 const TEXT_SPEED = 20 // chars per second
 const FPS = 60
 
-export const MyText: NextComponentType<NextPageContext, {}, Props> = ({
+export const NNText: NextComponentType<NextPageContext, {}, Props> = ({
   x,
   y,
   text,

@@ -3,7 +3,7 @@ import { Stage } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 import { MyContainer } from './MyContainer'
 import { Button } from './Button'
-import { MyText } from './MyText'
+import { NNText } from './NNText'
 
 const stageOption = {
   width: 800,
@@ -25,7 +25,7 @@ const Game: NextComponentType<NextPageContext, {}, Props> = () => {
   return (
     <Stage options={stageOption}>
       <MyContainer layers={layers} />
-      <MyText
+      <NNText
         onComplete={() => void 0}
         updateType="set"
         text={'そんなこと、言わないでよね。'}

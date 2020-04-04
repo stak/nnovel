@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Command, startScript, execScript } from '../../redux/scriptSlice'
 import { RootState } from '../../redux/rootReducer'
 import { commandActions } from '../../redux/commandActions'
-import { ScriptStage } from './ScriptStage'
+import { NNStage } from './NNStage'
 
 type Props = {
   script: Command[]
@@ -43,5 +43,5 @@ export const ScriptRunner: NextComponentType<NextPageContext, {}, Props> = ({
     }
   }, undefined)
 
-  return <ScriptStage next={next} />
+  return <NNStage next={next} />
 }
