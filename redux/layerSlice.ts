@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type LayerState = {
+  id: string
   src: string
 
   alpha: number
@@ -18,6 +19,8 @@ type SliceState = {
     layers: LayerState[]
   }
 }
+
+let counterForUniqId = 0
 
 export const layerSlice = createSlice({
   name: 'script',
@@ -37,6 +40,7 @@ export const layerSlice = createSlice({
     showBg(state, action: PayloadAction<(string | number)[]>) {
       const [src] = action.payload
       state.fore.base = {
+        id: 'fore.base',
         src: src as string,
 
         alpha: 1,
@@ -44,9 +48,29 @@ export const layerSlice = createSlice({
         y: 0,
       }
     },
+    showLayer(state, action: PayloadAction<(string | number)[]>) {
+      const [index, src, x, y] = action.payload
+
+      state.fore.layers[index as number] = {
+        id: `fore.layers[${index}]_${++counterForUniqId}`,
+        src: src as string,
+
+        alpha: 1,
+        x: x as number,
+        y: y as number,
+      }
+    },
+    moveLayer(state, action: PayloadAction<(string | number)[]>) {
+      const [index, x, y] = action.payload
+
+      if (state.fore.layers[index as number]) {
+        state.fore.layers[index as number].x = x as number
+        state.fore.layers[index as number].y = y as number
+      }
+    },
   },
 })
 
-export const { showBg } = layerSlice.actions
+export const { showBg, showLayer, moveLayer } = layerSlice.actions
 
 export default layerSlice.reducer

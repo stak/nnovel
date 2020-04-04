@@ -65,8 +65,52 @@ const sampleCmds: Command[] = [
     args: [],
   },
   {
+    name: 'showLayer',
+    args: [0, '/img/arie.png', 200, 0],
+  },
+  {
     name: 'setText',
-    args: ['果たしてこれは、お前の望んだ結末なのか？'],
+    args: ['って、うるさーーーーい！'],
+  },
+  {
+    name: 'waitText',
+    args: [],
+  },
+  {
+    name: 'waitClick',
+    args: [],
+  },
+  {
+    name: 'showLayer',
+    args: [0, '/img/arie.png', 300, 0],
+  },
+  {
+    name: 'setText',
+    args: ['うるさい、'],
+  },
+  {
+    name: 'waitText',
+    args: [],
+  },
+  {
+    name: 'moveLayer',
+    args: [0, 0, 0],
+  },
+  {
+    name: 'appendText',
+    args: ['うるさい、'],
+  },
+  {
+    name: 'waitText',
+    args: [],
+  },
+  {
+    name: 'moveLayer',
+    args: [0, 300, 0],
+  },
+  {
+    name: 'appendText',
+    args: ['うるさ～い！'],
   },
   {
     name: 'waitText',

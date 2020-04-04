@@ -49,14 +49,11 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
             y={state.layer.fore.base.y}
           />
         )}
-        {state.layer.fore.layers.map((layer, i) => (
-          <NNLayer
-            key={`fore.layers[${i}]`}
-            src={layer.src}
-            x={layer.x}
-            y={layer.y}
-          />
-        ))}
+        {state.layer.fore.layers.map((layer) =>
+          layer ? (
+            <NNLayer key={layer.id} src={layer.src} x={layer.x} y={layer.y} />
+          ) : null
+        )}
         <NNText
           text={state.text.current}
           updateType={state.text.updateType}
