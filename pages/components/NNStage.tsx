@@ -1,10 +1,9 @@
 import React from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useSelector, useDispatch } from 'react-redux'
-import { Stage, Container } from '@inlet/react-pixi'
+import { Stage } from '@inlet/react-pixi'
 
-import { NNText } from './NNText'
-import { NNLayer } from './NNLayer'
+import { NNScreen } from './NNScreen'
 import { NNTimer } from './NNTimer'
 import { RootState } from '../../redux/rootReducer'
 import { waitDone } from '../../redux/waitSlice'
@@ -25,7 +24,6 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
   next,
 }) => {
   const state = useSelector((state: RootState) => state)
-  const fore = state.layer.fore
   const dispatch = useDispatch()
 
   return (
@@ -42,29 +40,22 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
         event.preventDefault()
       }}
     >
-      <Container>
-        {fore.base && (
-          <NNLayer src={fore.base.src} x={fore.base.x} y={fore.base.y} />
-        )}
-        {fore.layers.map((layer) =>
-          layer ? (
-            <NNLayer key={layer.id} src={layer.src} x={layer.x} y={layer.y} />
-          ) : null
-        )}
-        <NNText
-          text={fore.message.current}
-          updateType={fore.message.updateType}
-          x={130}
-          y={450}
-          onComplete={() => {
-            if (state.wait.waitType === 'text') {
-              console.log('onTextComplete')
-              dispatch(waitDone())
-              next()
-            }
-          }}
-        />
-      </Container>
+      <NNScreen
+        state={state.layer.back}
+        renderable={false}
+        onTextComplete={() => void 0}
+      />
+      <NNScreen
+        state={state.layer.fore}
+        renderable={true}
+        onTextComplete={() => {
+          if (state.wait.waitType === 'text') {
+            console.log('onTextComplete')
+            dispatch(waitDone())
+            next()
+          }
+        }}
+      />
 
       {state.wait.waitType === 'time' && (
         <NNTimer

@@ -15,17 +15,15 @@ export type MessageLayerState = {
   updateType: 'set' | 'append'
 }
 
+export type LayerScreenState = {
+  base: LayerState | null
+  layers: LayerState[]
+  message: MessageLayerState
+}
+
 type SliceState = {
-  fore: {
-    base: LayerState | null
-    layers: LayerState[]
-    message: MessageLayerState
-  }
-  back: {
-    base: LayerState | null
-    layers: LayerState[]
-    message: MessageLayerState
-  }
+  fore: LayerScreenState
+  back: LayerScreenState
 }
 
 let counterForUniqId = 0
