@@ -25,6 +25,7 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
   next,
 }) => {
   const state = useSelector((state: RootState) => state)
+  const fore = state.layer.fore
   const dispatch = useDispatch()
 
   return (
@@ -42,21 +43,17 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
       }}
     >
       <Container>
-        {state.layer.fore.base && (
-          <NNLayer
-            src={state.layer.fore.base.src}
-            x={state.layer.fore.base.x}
-            y={state.layer.fore.base.y}
-          />
+        {fore.base && (
+          <NNLayer src={fore.base.src} x={fore.base.x} y={fore.base.y} />
         )}
-        {state.layer.fore.layers.map((layer) =>
+        {fore.layers.map((layer) =>
           layer ? (
             <NNLayer key={layer.id} src={layer.src} x={layer.x} y={layer.y} />
           ) : null
         )}
         <NNText
-          text={state.text.current}
-          updateType={state.text.updateType}
+          text={fore.message.current}
+          updateType={fore.message.updateType}
           x={130}
           y={450}
           onComplete={() => {

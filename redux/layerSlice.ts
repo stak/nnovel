@@ -9,14 +9,22 @@ export type LayerState = {
   y: number
 }
 
+export type MessageLayerState = {
+  history: string[]
+  current: string
+  updateType: 'set' | 'append'
+}
+
 type SliceState = {
   fore: {
     base: LayerState | null
     layers: LayerState[]
+    message: MessageLayerState
   }
   back: {
     base: LayerState | null
     layers: LayerState[]
+    message: MessageLayerState
   }
 }
 
@@ -29,10 +37,20 @@ export const layerSlice = createSlice({
     fore: {
       base: null,
       layers: [],
+      message: {
+        history: [],
+        current: '',
+        updateType: 'set',
+      },
     },
     back: {
       base: null,
       layers: [],
+      message: {
+        history: [],
+        current: '',
+        updateType: 'set',
+      },
     },
   } as SliceState,
 
@@ -68,9 +86,26 @@ export const layerSlice = createSlice({
         state.fore.layers[index as number].y = y as number
       }
     },
+    setText(state, action: PayloadAction<string[]>) {
+      const msg = state.fore.message
+      msg.history.push(msg.current)
+      msg.current = action.payload[0]
+      msg.updateType = 'set'
+    },
+    appendText(state, action: PayloadAction<string[]>) {
+      const msg = state.fore.message
+      msg.current += action.payload[0]
+      msg.updateType = 'append'
+    },
   },
 })
 
-export const { showBg, showLayer, moveLayer } = layerSlice.actions
+export const {
+  showBg,
+  showLayer,
+  moveLayer,
+  setText,
+  appendText,
+} = layerSlice.actions
 
 export default layerSlice.reducer
