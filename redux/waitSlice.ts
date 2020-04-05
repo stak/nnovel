@@ -6,6 +6,7 @@ const waitType = {
   Click: 'click',
   Time: 'time',
   Text: 'text',
+  Trans: 'trans',
 } as const
 type WaitType = typeof waitType[keyof typeof waitType]
 

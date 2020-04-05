@@ -7,6 +7,7 @@ import { NNScreen } from './NNScreen'
 import { NNTimer } from './NNTimer'
 import { RootState } from '../../redux/rootReducer'
 import { waitDone } from '../../redux/waitSlice'
+import { NNTransition } from './NNTransition'
 
 const stageOption = {
   width: 800,
@@ -40,21 +41,21 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
         event.preventDefault()
       }}
     >
-      <NNScreen
-        state={state.layer.back}
-        renderable={false}
-        onTextComplete={() => void 0}
-      />
-      <NNScreen
-        state={state.layer.fore}
-        renderable={true}
-        onTextComplete={() => {
-          if (state.wait.waitType === 'text') {
-            console.log('onTextComplete')
-            dispatch(waitDone())
-            next()
-          }
+      <NNTransition
+        Component={NNScreen}
+        method={state.layer.trans.method}
+        time={state.layer.trans.time}
+        foreProps={{
+          state: state.layer.fore,
+          onTextComplete: () => {
+            if (state.wait.waitType === 'text') {
+              console.log('onTextComplete')
+              dispatch(waitDone())
+              next()
+            }
+          },
         }}
+        backProps={{ state: state.layer.back, onTextComplete: () => void 0 }}
       />
 
       {state.wait.waitType === 'time' && (

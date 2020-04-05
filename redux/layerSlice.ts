@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { cloneDeep } from 'lodash'
 
 export type LayerState = {
   id: string
@@ -21,9 +22,24 @@ export type LayerScreenState = {
   message: MessageLayerState
 }
 
+// Enum
+export const transMethods = {
+  None: '',
+  Crossfade: 'crossfade',
+  Flyeye: 'flyeye',
+} as const
+export type TransMethod = typeof transMethods[keyof typeof transMethods]
+
+export type TransState = {
+  method: TransMethod
+  time: number
+  option: {}
+}
+
 type SliceState = {
   fore: LayerScreenState
   back: LayerScreenState
+  trans: TransState
 }
 
 let counterForUniqId = 0
@@ -49,6 +65,11 @@ export const layerSlice = createSlice({
         current: '',
         updateType: 'set',
       },
+    },
+    trans: {
+      method: '',
+      time: 0,
+      option: {},
     },
   } as SliceState,
 
@@ -76,6 +97,46 @@ export const layerSlice = createSlice({
         y: y as number,
       }
     },
+    readyBg(state, action: PayloadAction<(string | number)[]>) {
+      const [src] = action.payload
+      state.back.base = {
+        id: 'back.base',
+        src: src as string,
+
+        alpha: 1,
+        x: 0,
+        y: 0,
+      }
+    },
+    readyLayer(state, action: PayloadAction<(string | number)[]>) {
+      const [index, src, x, y] = action.payload
+
+      state.back.layers[index as number] = {
+        id: `back.layers[${index}]_${++counterForUniqId}`,
+        src: src as string,
+
+        alpha: 1,
+        x: x as number,
+        y: y as number,
+      }
+    },
+    backlay(state) {
+      state.back = cloneDeep(state.fore)
+    },
+    trans(state, action: PayloadAction<(string | number)[]>) {
+      const [method, time] = action.payload
+      if (
+        Object.keys(transMethods)
+          .map((s) => s.toLowerCase())
+          .includes(method as string)
+      ) {
+        state.trans.method = method as TransMethod
+        state.trans.time = time as number
+      } else {
+        throw new Error('invalid trans method: ' + method)
+      }
+    },
+
     moveLayer(state, action: PayloadAction<(string | number)[]>) {
       const [index, x, y] = action.payload
 
