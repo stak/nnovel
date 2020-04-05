@@ -1,15 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { RenderTexture, Sprite, DisplayObject, Filter } from 'pixi.js'
-import { Container, useApp, useTick } from '@inlet/react-pixi'
-import { NextComponentType, NextPageContext, NextPage } from 'next'
+import { useApp, useTick } from '@inlet/react-pixi'
+import { NextComponentType, NextPageContext } from 'next'
 
-import { TransMethod } from '../../redux/layerSlice'
+import { TransMethod, LayerSetState } from '../../redux/gameSlice'
 import { FlyeyeTransition } from './transition/FlyeyeTransition'
 
 type Props = {
   Component: NextComponentType<NextPageContext, {}, any>
-  foreProps: {}
-  backProps: {}
+  foreProps: {
+    state: LayerSetState
+    onTextComplete: () => void
+  }
+  backProps: {
+    state: LayerSetState
+    onTextComplete: () => void
+  }
+  onTransComplete: () => void
 
   time: number
   method: TransMethod
@@ -20,6 +27,7 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
   Component,
   foreProps,
   backProps,
+  onTransComplete,
 
   time,
   method,
@@ -44,8 +52,12 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
     if (filter.current) {
       elapsed.current += delta || 0
 
-      const pixiObject = (flip ? refA.current : refB.current) as DisplayObject
-      app.renderer.render(pixiObject, texture.current)
+      const toInstance = (flip ? refA.current : refB.current) as DisplayObject
+
+      // dirty workaround...
+      toInstance.renderable = true
+      app.renderer.render(toInstance, texture.current)
+      toInstance.renderable = false
 
       const progress = elapsed.current / (time / 60)
       if (progress < 1) {
@@ -53,6 +65,14 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
       } else {
         // transition end
         filter.current = undefined
+        const fromInstance = (flip
+          ? refB.current
+          : refA.current) as DisplayObject
+        fromInstance.filters = []
+        foreProps.onTextComplete()
+
+        setFlip(!flip)
+        onTransComplete()
       }
     }
   })
@@ -65,23 +85,22 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
       fromInstance.filters = [filter.current]
 
       filter.current.uniforms.progress = 0
+      for (const [k, v] of Object.entries(option)) {
+        filter.current.uniforms[k] = v // apply filter options
+      }
       elapsed.current = 0
     }
   }, [time, method])
 
   return flip ? (
     <>
-      <Container renderable={false}>
-        <Component key="A" {...backProps} _ref={refA} />
-      </Container>
-      <Component key="B" {...foreProps} _ref={refB} />
+      <Component key="A" {...backProps} _ref={refA} renderable={false} />
+      <Component key="B" {...foreProps} _ref={refB} renderable={true} />
     </>
   ) : (
     <>
-      <Component key="A" {...foreProps} _ref={refA} />
-      <Container renderable={false}>
-        <Component key="B" {...backProps} _ref={refB} />
-      </Container>
+      <Component key="A" {...foreProps} _ref={refA} renderable={true} />
+      <Component key="B" {...backProps} _ref={refB} renderable={false} />
     </>
   )
 }

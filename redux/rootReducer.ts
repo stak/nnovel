@@ -1,13 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 import scriptReducer from './scriptSlice'
-import waitReducer from './waitSlice'
-import layerReducer from './layerSlice'
+import gameReducer from './gameSlice'
 
 const rootReducer = combineReducers({
   script: scriptReducer,
-  wait: waitReducer,
-  layer: layerReducer,
+  game: gameReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

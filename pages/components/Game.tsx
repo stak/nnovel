@@ -15,11 +15,10 @@ const sampleCmds: Command[] = nnParser.script.tryParse(`
 /trans "flyeye" 3000
 
 /moveLayer 0 -500 0
-/waitTime 400
-/moveLayer 0 300 0
-/waitTime 400
+オラオラオラオラオラオラオラオラオラオラ
 
-いい感じですね？\\
+/waitTrans
+いい感じですね？
 
 `) as Command[]
 

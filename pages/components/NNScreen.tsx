@@ -3,10 +3,10 @@ import { Container } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 import { NNLayer } from './NNLayer'
 import { NNText } from './NNText'
-import { LayerScreenState } from '../../redux/layerSlice'
+import { LayerSetState } from '../../redux/gameSlice'
 
 type Props = {
-  state: LayerScreenState
+  state: LayerSetState
   onTextComplete: () => void
   renderable: boolean
   _ref: React.RefObject<React.Component>

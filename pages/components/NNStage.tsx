@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useSelector, useDispatch } from 'react-redux'
 import { Stage } from '@inlet/react-pixi'
@@ -6,7 +6,7 @@ import { Stage } from '@inlet/react-pixi'
 import { NNScreen } from './NNScreen'
 import { NNTimer } from './NNTimer'
 import { RootState } from '../../redux/rootReducer'
-import { waitDone } from '../../redux/waitSlice'
+import { transDone, waitDone } from '../../redux/gameSlice'
 import { NNTransition } from './NNTransition'
 
 const stageOption = {
@@ -24,16 +24,25 @@ type Props = {
 export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
   next,
 }) => {
-  const state = useSelector((state: RootState) => state)
+  const $wait = useSelector((state: RootState) => state.game.wait)
+  const $screen = useSelector((state: RootState) => state.game.screen)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if ($wait.waitNone) {
+      console.log('onNone')
+      dispatch(waitDone(['none']))
+      next()
+    }
+  }, [$wait.waitNone])
 
   return (
     <Stage
       options={stageOption}
       onClick={() => {
-        if (state.wait.waitType === 'click') {
+        if ($wait.waitClick) {
           console.log('onClick')
-          dispatch(waitDone())
+          dispatch(waitDone(['click']))
           next()
         }
       }}
@@ -43,27 +52,35 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
     >
       <NNTransition
         Component={NNScreen}
-        method={state.layer.trans.method}
-        time={state.layer.trans.time}
+        method={$screen.trans.method}
+        time={$screen.trans.time}
         foreProps={{
-          state: state.layer.fore,
+          state: $screen.fore,
           onTextComplete: () => {
-            if (state.wait.waitType === 'text') {
+            if ($wait.waitText) {
               console.log('onTextComplete')
-              dispatch(waitDone())
+              dispatch(waitDone(['text']))
               next()
             }
           },
         }}
-        backProps={{ state: state.layer.back, onTextComplete: () => void 0 }}
+        backProps={{ state: $screen.back, onTextComplete: () => void 0 }}
+        onTransComplete={() => {
+          dispatch(transDone())
+          if ($wait.waitTrans) {
+            console.log('onTransComplete')
+            dispatch(waitDone(['trans']))
+            next()
+          }
+        }}
       />
 
-      {state.wait.waitType === 'time' && (
+      {$wait.waitTime && (
         <NNTimer
-          time={state.wait.time}
+          time={$wait.time}
           onComplete={() => {
             console.log('onTimerComplete')
-            dispatch(waitDone())
+            dispatch(waitDone(['time']))
             next()
           }}
         />

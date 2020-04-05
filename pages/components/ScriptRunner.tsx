@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Command, startScript, execScript } from '../../redux/scriptSlice'
-import { waitSlice } from '../../redux/waitSlice'
 import { RootState } from '../../redux/rootReducer'
 import { commandActionCreators } from '../../redux/commandActions'
 import { NNStage } from './NNStage'
@@ -37,7 +36,7 @@ export const ScriptRunner: NextComponentType<NextPageContext, {}, Props> = ({
         const action = cmd(args)
         dispatch(action)
 
-        if (action.type.split('/')[0] === waitSlice.name) {
+        if (action.type.slice(0, 9) === 'game/wait') {
           // wait 系コマンド実行時、待ちに入る
           // <NNStage> 下のコンポーネントが next を呼ぶことで継続する
         } else {

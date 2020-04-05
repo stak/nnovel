@@ -1,7 +1,6 @@
 import { ActionCreator, Action } from '@reduxjs/toolkit'
 import { scriptSlice } from './scriptSlice'
-import { waitSlice } from './waitSlice'
-import { layerSlice } from './layerSlice'
+import { gameSlice } from './gameSlice'
 
 export type CommandActionCreators = {
   [key: string]: ActionCreator<Action<string>>
@@ -9,6 +8,5 @@ export type CommandActionCreators = {
 
 export const commandActionCreators: CommandActionCreators = {
   ...scriptSlice.actions,
-  ...waitSlice.actions,
-  ...layerSlice.actions,
+  ...gameSlice.actions,
 }
