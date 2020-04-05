@@ -1,6 +1,6 @@
 import React from 'react'
 import { NextComponentType, NextPageContext } from 'next'
-import { ScriptRunner } from './ScriptRunner'
+import { NNEngine } from './NNEngine'
 import { Command } from '../../redux/scriptSlice'
 import { nnParser } from './parser'
 
@@ -42,7 +42,7 @@ const sampleCmds: Command[] = nnParser.script.tryParse(`
 type Props = {}
 
 const Game: NextComponentType<NextPageContext, {}, Props> = () => {
-  return <ScriptRunner script={sampleCmds} />
+  return <NNEngine script={sampleCmds} />
 }
 
 export default Game

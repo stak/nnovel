@@ -10,7 +10,7 @@ type Props = {
   script: Command[]
 }
 
-export const ScriptRunner: NextComponentType<NextPageContext, {}, Props> = ({
+export const NNEngine: NextComponentType<NextPageContext, {}, Props> = ({
   script,
 }) => {
   const nextCommand = useSelector(
