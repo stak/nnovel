@@ -18,7 +18,24 @@ const sampleCmds: Command[] = nnParser.script.tryParse(`
 オラオラオラオラオラオラオラオラオラオラ
 
 /waitTrans
-いい感じですね？
+いい感じですね？@
+
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/arie.png" 0 0
+/trans "flyeye" 1000
+/waitTrans
+/readyBg "/img/whiteout"
+/readyLayer 0 "/img/arie.png" 300 0
+/trans "flyeye" 1000
+/waitTrans
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/arie.png" 50 0
+/trans "flyeye" 1000
+/waitTrans
+/readyBg "/img/whiteout"
+/readyLayer 0 "/img/arie.png" 100 0
+/trans "flyeye" 1000
+/waitTrans
 
 `) as Command[]
 
