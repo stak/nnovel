@@ -4,7 +4,7 @@ import { useApp, useTick } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 
 import { TransMethod, LayerSetState } from '../../redux/gameSlice'
-import { FlyeyeTransition } from './transition/FlyeyeTransition'
+import * as transition from './transition'
 
 type Props = {
   Component: NextComponentType<NextPageContext, {}, any>
@@ -80,8 +80,14 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
   useEffect(() => {
     const fromInstance = (flip ? refB.current : refA.current) as DisplayObject
 
-    if (method === 'flyeye') {
-      filter.current = new FlyeyeTransition(tmpSprite.current)
+    if (Object.keys(transition).includes(method)) {
+      let trans = transition.crossfade
+      if (method === 'flyeye') {
+        trans = transition.flyeye
+      } else if (method === 'crossfade') {
+        trans = transition.crossfade
+      }
+      filter.current = new trans(tmpSprite.current)
       fromInstance.filters = [filter.current]
 
       filter.current.uniforms.progress = 0
