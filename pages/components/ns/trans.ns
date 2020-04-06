@@ -1,0 +1,11 @@
+/showBg "/img/bg1.png"
+/showLayer 0 "/img/arie.png" 200 0
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "flyeye" 3000
+/waitTrans
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "flyeye" 3000

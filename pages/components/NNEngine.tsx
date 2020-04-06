@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Command, startScript, execScript } from '../../redux/scriptSlice'
+import { gameInit } from '../../redux/gameSlice'
 import { RootState } from '../../redux/rootReducer'
 import { commandActionCreators } from '../../redux/commandActions'
 import { NNStage } from './NNStage'
@@ -21,14 +22,22 @@ export const NNEngine: NextComponentType<NextPageContext, {}, Props> = ({
     dispatch(execScript())
   }
 
+  let isInit = false
+
   // init
   useEffect(() => {
+    console.log('Init')
+    dispatch(gameInit())
     dispatch(startScript(script))
+    isInit = true
   }, [script])
 
   // main loop
   useEffect(() => {
-    console.log('Run')
+    if (isInit) {
+      return
+    }
+    console.log('Main')
     if (nextCommand) {
       if (Object.keys(commandActionCreators).includes(nextCommand.name)) {
         const cmd = commandActionCreators[nextCommand.name]
@@ -43,7 +52,7 @@ export const NNEngine: NextComponentType<NextPageContext, {}, Props> = ({
           next()
         }
       } else {
-        console.log(Object.keys(commandActionCreators))
+        console.log(nextCommand)
         throw new Error('invalid command: ' + nextCommand.name)
       }
     } else {

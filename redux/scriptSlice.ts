@@ -24,6 +24,7 @@ export const scriptSlice = createSlice({
     startScript(state, action: PayloadAction<Array<Command>>) {
       state.commands = action.payload
       state.pos = 0
+      state.eos = false
     },
     execScript(state) {
       if (state.pos < state.commands.length) {

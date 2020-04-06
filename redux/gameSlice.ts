@@ -68,46 +68,52 @@ type GameState = {
 
 let counterForUniqId = 0
 
+const gameInitialState: GameState = {
+  screen: {
+    fore: {
+      base: null,
+      layers: [],
+      message: {
+        history: [],
+        current: '',
+        updateType: 'set',
+      },
+    },
+    back: {
+      base: null,
+      layers: [],
+      message: {
+        history: [],
+        current: '',
+        updateType: 'set',
+      },
+    },
+    trans: {
+      method: '',
+      time: 0,
+      option: {},
+    },
+  },
+  wait: {
+    waitNone: false,
+    waitClick: false,
+    waitTime: false,
+    waitText: false,
+    waitTrans: false,
+    time: 0,
+  },
+}
+
 export const gameSlice = createSlice({
   name: 'game',
 
-  initialState: {
-    screen: {
-      fore: {
-        base: null,
-        layers: [],
-        message: {
-          history: [],
-          current: '',
-          updateType: 'set',
-        },
-      },
-      back: {
-        base: null,
-        layers: [],
-        message: {
-          history: [],
-          current: '',
-          updateType: 'set',
-        },
-      },
-      trans: {
-        method: '',
-        time: 0,
-        option: {},
-      },
-    },
-    wait: {
-      waitNone: false,
-      waitClick: false,
-      waitTime: false,
-      waitText: false,
-      waitTrans: false,
-      time: 0,
-    },
-  } as GameState,
+  initialState: gameInitialState,
 
   reducers: {
+    gameInit(state) {
+      state.screen = cloneDeep(gameInitialState.screen)
+      state.wait = cloneDeep(gameInitialState.wait)
+    },
     showBg(state, action: PayloadAction<(string | number)[]>) {
       const [src] = action.payload
       state.screen.fore.base = {
@@ -233,6 +239,7 @@ export const gameSlice = createSlice({
 })
 
 export const {
+  gameInit,
   showBg,
   showLayer,
   moveLayer,

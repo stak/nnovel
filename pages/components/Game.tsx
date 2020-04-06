@@ -1,48 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { NNEngine } from './NNEngine'
 import { Command } from '../../redux/scriptSlice'
 import { nnParser } from './parser'
+import * as NNScripts from './ns'
 
-const sampleCmds: Command[] = nnParser.script.tryParse(`
-/showBg "/img/bg1.png"
-/showLayer 0 "/img/arie.png" 200 0
-
-こんにちは。\\
-
-/readyBg "/img/bg2.jpg"
-/readyLayer 0 "/img/arie.png" 200 0
-/trans "flyeye" 3000
-
-/moveLayer 0 -500 0
-オラオラオラオラオラオラオラオラオラオラ
-
-/waitTrans
-いい感じですね？@
-
-/readyBg "/img/bg1.png"
-/readyLayer 0 "/img/arie.png" 0 0
-/trans "flyeye" 1000
-/waitTrans
-/readyBg "/img/whiteout"
-/readyLayer 0 "/img/arie.png" 300 0
-/trans "flyeye" 1000
-/waitTrans
-/readyBg "/img/bg1.png"
-/readyLayer 0 "/img/arie.png" 50 0
-/trans "flyeye" 1000
-/waitTrans
-/readyBg "/img/whiteout"
-/readyLayer 0 "/img/arie.png" 100 0
-/trans "flyeye" 1000
-/waitTrans
-
-`) as Command[]
+const parse = (src: string): Command[] => nnParser.script.tryParse(src)
 
 type Props = {}
 
 const Game: NextComponentType<NextPageContext, {}, Props> = () => {
-  return <NNEngine script={sampleCmds} />
+  const [script, setScript] = useState(parse(NNScripts.index))
+
+  return (
+    <div style={{ display: 'flex' }}>
+      <ul
+        style={{
+          background: '#000000',
+          minWidth: '140px',
+          listStyleType: 'none',
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        {Object.entries(NNScripts).map(([name, src]) => {
+          return (
+            <a
+              key={name}
+              href="#"
+              style={{
+                textDecoration: 'none',
+                textAlign: 'center',
+              }}
+              onClick={() => {
+                const scriptCommands = parse(src)
+                setScript(scriptCommands)
+              }}
+            >
+              <li
+                style={{
+                  color: 'white',
+                  padding: '2px',
+                  backgroundColor: 'rgba(255,255,255,0.3)',
+                }}
+              >
+                {name}
+              </li>
+            </a>
+          )
+        })}
+      </ul>
+      <NNEngine script={script} />
+    </div>
+  )
 }
 
 export default Game
