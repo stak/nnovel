@@ -3,9 +3,9 @@
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "crossfade" 3000
+/trans "slice" 3000
 /waitTrans
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "crossfade" 3000
+/trans "slice" 3000 30 0.1

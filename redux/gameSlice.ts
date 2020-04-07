@@ -27,13 +27,14 @@ export const transMethods = {
   None: '',
   Crossfade: 'crossfade',
   Flyeye: 'flyeye',
+  Slice: 'slice',
 } as const
 export type TransMethod = typeof transMethods[keyof typeof transMethods]
 
 export type TransState = {
   method: TransMethod
   time: number
-  option: {}
+  options: (string | number)[]
 }
 
 type ScreenState = {
@@ -91,7 +92,7 @@ const gameInitialState: GameState = {
     trans: {
       method: '',
       time: 0,
-      option: {},
+      options: [],
     },
   },
   wait: {
@@ -167,7 +168,7 @@ export const gameSlice = createSlice({
       state.screen.fore = cloneDeep(state.screen.back)
     },
     trans(state, action: PayloadAction<(string | number)[]>) {
-      const [method, time] = action.payload
+      const [method, time, ...options] = action.payload
       if (
         Object.keys(transMethods)
           .map((s) => s.toLowerCase())
@@ -175,6 +176,7 @@ export const gameSlice = createSlice({
       ) {
         state.screen.trans.method = method as TransMethod
         state.screen.trans.time = time as number
+        state.screen.trans.options = options
       } else {
         throw new Error('invalid trans method: ' + method)
       }

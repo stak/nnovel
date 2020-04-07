@@ -54,6 +54,7 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
         Component={NNScreen}
         method={$screen.trans.method}
         time={$screen.trans.time}
+        options={$screen.trans.options}
         foreProps={{
           state: $screen.fore,
           onTextComplete: () => {

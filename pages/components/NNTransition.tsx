@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { RenderTexture, Sprite, DisplayObject, Filter } from 'pixi.js'
+import { RenderTexture, Sprite, DisplayObject } from 'pixi.js'
 import { useApp, useTick } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 
 import { TransMethod, LayerSetState } from '../../redux/gameSlice'
 import * as transition from './transition'
+import { Transition } from './transition/Transition'
 
 type Props = {
   Component: NextComponentType<NextPageContext, {}, any>
@@ -20,7 +21,7 @@ type Props = {
 
   time: number
   method: TransMethod
-  option?: {}
+  options?: (string | number)[]
 }
 
 export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
@@ -31,7 +32,7 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
 
   time,
   method,
-  option = {},
+  options = [],
 }) => {
   const app = useApp()
   const [flip, setFlip] = useState(false)
@@ -45,7 +46,7 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
     })
   )
   const tmpSprite = useRef(new Sprite(texture.current))
-  const filter = useRef<Filter>()
+  const filter = useRef<Transition>()
 
   const elapsed = useRef(0)
   useTick((delta) => {
@@ -81,19 +82,19 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
     const fromInstance = (flip ? refB.current : refA.current) as DisplayObject
 
     if (Object.keys(transition).includes(method)) {
-      let trans = transition.crossfade
       if (method === 'flyeye') {
-        trans = transition.flyeye
+        filter.current = new transition.flyeye(tmpSprite.current)
       } else if (method === 'crossfade') {
-        trans = transition.crossfade
+        filter.current = new transition.crossfade(tmpSprite.current)
+      } else if (method === 'slice') {
+        filter.current = new transition.slice(tmpSprite.current)
+      } else {
+        filter.current = new transition.crossfade(tmpSprite.current)
       }
-      filter.current = new trans(tmpSprite.current)
       fromInstance.filters = [filter.current]
 
       filter.current.uniforms.progress = 0
-      for (const [k, v] of Object.entries(option)) {
-        filter.current.uniforms[k] = v // apply filter options
-      }
+      filter.current.setOptions(options)
       elapsed.current = 0
     }
   }, [time, method])
