@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { cloneDeep } from 'lodash'
 
+const transList = ['crossfade', 'slice', 'flyeye', 'blur']
+
 export type LayerState = {
   id: string
   src: string
@@ -22,17 +24,8 @@ export type LayerSetState = {
   message: MessageLayerState
 }
 
-// Enum
-export const transMethods = {
-  None: '',
-  Crossfade: 'crossfade',
-  Flyeye: 'flyeye',
-  Slice: 'slice',
-} as const
-export type TransMethod = typeof transMethods[keyof typeof transMethods]
-
 export type TransState = {
-  method: TransMethod
+  method: string
   time: number
   options: (string | number)[]
 }
@@ -169,12 +162,8 @@ export const gameSlice = createSlice({
     },
     trans(state, action: PayloadAction<(string | number)[]>) {
       const [method, time, ...options] = action.payload
-      if (
-        Object.keys(transMethods)
-          .map((s) => s.toLowerCase())
-          .includes(method as string)
-      ) {
-        state.screen.trans.method = method as TransMethod
+      if (transList.includes(method as string)) {
+        state.screen.trans.method = method as string
         state.screen.trans.time = time as number
         state.screen.trans.options = options
       } else {

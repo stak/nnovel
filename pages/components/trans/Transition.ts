@@ -13,9 +13,8 @@ type Shader = {
 }
 
 export class Transition extends Filter {
-  transSprite: Sprite
-  transMatrix: Matrix
-  options: (string | number)[]
+  private transSprite: Sprite
+  private transMatrix: Matrix
 
   constructor(sprite: Sprite, shader: Shader) {
     const transMatrix = new Matrix()
@@ -27,14 +26,8 @@ export class Transition extends Filter {
       },
     })
 
-    this.options = []
     this.transSprite = sprite
     this.transMatrix = transMatrix
-  }
-
-  setOptions(options: (number | string)[]): void {
-    this.options = options
-    return
   }
 
   apply(

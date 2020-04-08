@@ -6,9 +6,9 @@ uniform sampler2D uTrans;
 
 uniform float progress;
 
-const float size = 0.04;
-const float zoom = 10.0;
-const float colorSeparation = 0.3;
+uniform float size;
+uniform float zoom;
+uniform float colorSeparation;
 
 void main(void)
 {

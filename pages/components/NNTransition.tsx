@@ -3,9 +3,9 @@ import { RenderTexture, Sprite, DisplayObject } from 'pixi.js'
 import { useApp, useTick } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 
-import { TransMethod, LayerSetState } from '../../redux/gameSlice'
-import * as transition from './transition'
-import { Transition } from './transition/Transition'
+import { LayerSetState } from '../../redux/gameSlice'
+import { trans } from './trans'
+import { Transition } from './trans/Transition'
 
 type Props = {
   Component: NextComponentType<NextPageContext, {}, any>
@@ -20,7 +20,7 @@ type Props = {
   onTransComplete: () => void
 
   time: number
-  method: TransMethod
+  method: string
   options?: (string | number)[]
 }
 
@@ -81,20 +81,11 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
   useEffect(() => {
     const fromInstance = (flip ? refB.current : refA.current) as DisplayObject
 
-    if (Object.keys(transition).includes(method)) {
-      if (method === 'flyeye') {
-        filter.current = new transition.flyeye(tmpSprite.current)
-      } else if (method === 'crossfade') {
-        filter.current = new transition.crossfade(tmpSprite.current)
-      } else if (method === 'slice') {
-        filter.current = new transition.slice(tmpSprite.current)
-      } else {
-        filter.current = new transition.crossfade(tmpSprite.current)
-      }
+    if (Object.keys(trans).includes(method)) {
+      filter.current = trans[method](tmpSprite.current, options)
       fromInstance.filters = [filter.current]
 
       filter.current.uniforms.progress = 0
-      filter.current.setOptions(options)
       elapsed.current = 0
     }
   }, [time, method])

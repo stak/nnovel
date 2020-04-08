@@ -3,9 +3,9 @@
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "slice" 3000
+/trans "blur" 3000
 /waitTrans
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "slice" 3000 30 0.1
+/trans "blur" 3000 0.1 6 0.4
