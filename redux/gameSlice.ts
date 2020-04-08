@@ -9,6 +9,7 @@ const transList = [
   'blur',
   'wind',
   'randsquare',
+  'pixelize',
 ]
 
 export type LayerState = {

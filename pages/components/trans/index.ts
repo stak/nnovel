@@ -8,6 +8,7 @@ import { blurTransition } from './blurTransition'
 import { universalTransition } from './universalTransition'
 import { windTransition } from './windTransition'
 import { randsquareTransition } from './randsquareTransition'
+import { pixelizeTransition } from './pixelizeTransition'
 
 export const trans: {
   [key: string]: (sprite: Sprite, options: (number | string)[]) => Transition
@@ -19,4 +20,5 @@ export const trans: {
   blur: blurTransition,
   wind: windTransition,
   randsquare: randsquareTransition,
+  pixelize: pixelizeTransition,
 }
