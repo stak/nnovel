@@ -2,24 +2,23 @@ import { Sprite } from 'pixi.js'
 import { Transition } from './Transition'
 
 import vert from './base.vert'
-import frag from './slice.flag'
+import frag from './wind.flag'
 
 const directionPart: { [key: string]: string[] } = {
-  right: ['vTextureCoord.x'],
-  left: ['(1.0 - vTextureCoord.x)'],
-  up: ['(1.0 - vTextureCoord.y)'],
-  down: ['vTextureCoord.y'],
+  right: ['vTextureCoord.y', 'vTextureCoord.x'],
+  left: ['vTextureCoord.y', '(1.0 - vTextureCoord.x)'],
+  up: ['vTextureCoord.x', '(1.0 - vTextureCoord.y)'],
+  down: ['vTextureCoord.x', 'vTextureCoord.y'],
 }
 
-const defaultCount = 15
-const defaultSmoothness = 0.5
 const defaultDirection = 'right'
+const defaultSize = 20
 
-export function sliceTransition(
+export function windTransition(
   sprite: Sprite,
   options: (number | string)[]
 ): Transition {
-  const [direction, count, smoothness] = options
+  const [direction, size] = options
 
   const filledFrag = frag.replace(
     /\$(\d+)/g,
@@ -28,8 +27,7 @@ export function sliceTransition(
   )
   const t = new Transition(sprite, { vert, frag: filledFrag })
 
-  t.uniforms.count = count || defaultCount
-  t.uniforms.smoothness = smoothness || defaultSmoothness
+  t.uniforms.size = ((size as number) || defaultSize) / 100
 
   return t
 }

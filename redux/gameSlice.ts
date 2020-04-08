@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { cloneDeep } from 'lodash'
 
-const transList = ['crossfade', 'universal', 'slice', 'flyeye', 'blur']
+const transList = ['crossfade', 'universal', 'slice', 'flyeye', 'blur', 'wind']
 
 export type LayerState = {
   id: string

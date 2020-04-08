@@ -1,5 +1,42 @@
 /showBg "/img/bg1.png"
 
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "blur" 3000 3 20
+/waitTrans
+
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "blur" 6000 5 20
+/waitTrans
+
+@
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "slice" 3000 "up" 30
+/waitTrans
+
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "slice" 3000 "down" 30
+/waitTrans
+
+@
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "wind" 3000 "right" 30
+/waitTrans
+
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "wind" 3000 "left" 30
+/waitTrans
+
+@
+
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
 /trans "universal" 3000 "/img/mask1.png" 25
@@ -8,3 +45,4 @@
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
 /trans "universal" 3000 "/img/mask1.png" 25
+/waitTrans

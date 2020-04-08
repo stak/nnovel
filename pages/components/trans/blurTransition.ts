@@ -4,19 +4,20 @@ import { Transition } from './Transition'
 import vert from './base.vert'
 import frag from './blur.flag'
 
-const defaultIntensity = 0.1
+const defaultIntensity = 10
 const defaultPass = 8
 
 export function blurTransition(
   sprite: Sprite,
   options: (number | string)[]
 ): Transition {
-  const t = new Transition(sprite, { vert, frag })
-
-  console.log(options)
   const [intensity, pass] = options
-  t.uniforms.intensity = intensity || defaultIntensity
-  t.uniforms.pass = pass || defaultPass
+
+  const stringPass = String(pass || defaultPass)
+  const filledFrag = frag.replace(/\$0/g, () => stringPass)
+  const t = new Transition(sprite, { vert, frag: filledFrag })
+
+  t.uniforms.intensity = ((intensity as number) || defaultIntensity) / 100
 
   return t
 }

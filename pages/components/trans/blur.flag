@@ -6,7 +6,7 @@ uniform sampler2D uTrans;
 
 uniform float progress;
 uniform float intensity;
-const int passes = 8;
+const int passes = $0;
 
 void main(void)
 {
