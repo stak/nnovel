@@ -2,7 +2,7 @@ import { Sprite } from 'pixi.js'
 import { Transition } from './Transition'
 
 import vert from './base.vert'
-import frag from './universal.flag'
+import frag from './universal.frag'
 
 const defaultVague = 25
 

@@ -2,7 +2,7 @@ import { Sprite } from 'pixi.js'
 import { Transition } from './Transition'
 
 import vert from './base.vert'
-import frag from './blur.flag'
+import frag from './blur.frag'
 
 const defaultIntensity = 10
 const defaultPass = 8

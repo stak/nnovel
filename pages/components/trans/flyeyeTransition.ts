@@ -2,7 +2,7 @@ import { Sprite } from 'pixi.js'
 import { Transition } from './Transition'
 
 import vert from './base.vert'
-import frag from './flyeye.flag'
+import frag from './flyeye.frag'
 
 const defaultSize = 0.04
 const defaultZoom = 10.0

@@ -2,7 +2,7 @@ import { Sprite } from 'pixi.js'
 import { Transition } from './Transition'
 
 import vert from './base.vert'
-import frag from './slice.flag'
+import frag from './slice.frag'
 
 const directionPart: { [key: string]: string[] } = {
   right: ['vTextureCoord.x'],

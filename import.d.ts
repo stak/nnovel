@@ -2,7 +2,7 @@ declare module '*.ns' {
   const content: string;
   export default content;
 }
-declare module '*.flag' {
+declare module '*.frag' {
   const content: string;
   export default content;
 }
