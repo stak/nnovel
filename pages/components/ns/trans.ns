@@ -1,11 +1,10 @@
 /showBg "/img/bg1.png"
-/showLayer 0 "/img/arie.png" 200 0
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "blur" 3000
+/trans "universal" 3000 "/img/mask1.png" 25
 /waitTrans
 
-/readyBg "/img/bg2.jpg"
-/readyLayer 0 "/img/qwer.png" 300 0
-/trans "blur" 3000 0.1 6 0.4
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "universal" 3000 "/img/mask1.png" 25
