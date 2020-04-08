@@ -3,6 +3,18 @@
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
+/trans "universal" 3000 "/img/mask1.png" 25
+/waitTrans
+
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "universal" 3000 "/img/mask1.png" 25
+/waitTrans
+
+@
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
 /trans "blur" 3000 3 20
 /waitTrans
 

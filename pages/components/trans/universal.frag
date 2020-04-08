@@ -17,5 +17,5 @@ void main(void)
     gl_FragColor = mix(
         from,
         to,
-        smoothstep(progress - vague, progress, rule.r * (1.0 - vague)));
+        smoothstep(progress - vague, progress, $0 * (1.0 - vague)));
 }

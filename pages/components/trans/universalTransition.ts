@@ -10,9 +10,13 @@ export function universalTransition(
   sprite: Sprite,
   options: (number | string)[]
 ): Transition {
-  const t = new Transition(sprite, { vert, frag })
+  const [ruleImage, vague, reverse] = options
 
-  const [ruleImage, vague] = options
+  const filledFrag = frag.replace(/\$0/g, () =>
+    reverse ? 'rule.r' : '(1.0 - rule.r)'
+  )
+  const t = new Transition(sprite, { vert, frag: filledFrag })
+
   t.uniforms.vague = ((vague || defaultVague) as number) / 100
 
   // NOTE: need to preload ruleImage
