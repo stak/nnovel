@@ -16,132 +16,132 @@
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "zoom" 3000
+/trans "zoom" 1000
 /waitTrans
 
 /moveLayer 0 0 0
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "zoom" 3000
+/trans "zoom" 1000
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "crosszoom" 3000 0.3
+/trans "crosszoom" 1000 0.3
 /waitTrans
 
 /moveLayer 0 0 0
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "crosszoom" 2000 0.3
+/trans "crosszoom" 1000 0.3
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "radial" 5000
+/trans "radial" 1000
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "radial" 5000 "up" 50 1
+/trans "radial" 1000 "up" 50 1
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "circle" 3000
+/trans "circle" 1000
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "circle" 3000
+/trans "circle" 1000
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "wipe" 3000
+/trans "wipe" 1000
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "wipe" 3000
+/trans "wipe" 1000
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "pixelize" 3000 20 20 30
+/trans "pixelize" 1000 20 20 30
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "pixelize" 3000 20 20 30
+/trans "pixelize" 1000 20 20 30
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "randsquare" 3000 30 10 10
+/trans "randsquare" 1000 30 10 10
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "randsquare" 3000 30 10 10
+/trans "randsquare" 1000 30 10 10
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "universal" 3000 "/img/mask1.png" 25
+/trans "universal" 1000 "/img/mask1.png" 25
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "universal" 3000 "/img/mask1.png" 25
+/trans "universal" 1000 "/img/mask1.png" 25
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "blur" 3000 3 20
+/trans "blur" 1000 3 20
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "blur" 6000 5 20
+/trans "blur" 1000 5 20
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "slice" 3000 "up" 30
+/trans "slice" 1000 "up" 30
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "slice" 3000 "down" 30
+/trans "slice" 1000 "down" 30
 /waitTrans
 
 @
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
-/trans "wind" 3000 "right" 30
+/trans "wind" 1000 "right" 30
 /waitTrans
 
 /readyBg "/img/bg1.png"
 /readyLayer 0 "/img/qwer.png" 100 0
-/trans "wind" 3000 "left" 30
+/trans "wind" 1000 "left" 30
 /waitTrans

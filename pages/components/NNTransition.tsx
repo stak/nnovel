@@ -60,7 +60,7 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
       app.renderer.render(toInstance, texture.current)
       toInstance.renderable = false
 
-      const progress = elapsed.current / (time / 60)
+      const progress = (elapsed.current * 60 * 60) / (app.ticker.FPS * time)
       if (progress < 1) {
         filter.current.uniforms.progress = progress
       } else {
