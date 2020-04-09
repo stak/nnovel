@@ -10,6 +10,7 @@ import { windTransition } from './windTransition'
 import { randsquareTransition } from './randsquareTransition'
 import { pixelizeTransition } from './pixelizeTransition'
 import { wipeTransition } from './wipeTransition'
+import { circleTransition } from './circleTransition'
 
 export const trans: {
   [key: string]: (sprite: Sprite, options: (number | string)[]) => Transition
@@ -23,4 +24,5 @@ export const trans: {
   randsquare: randsquareTransition,
   pixelize: pixelizeTransition,
   wipe: wipeTransition,
+  circle: circleTransition,
 }

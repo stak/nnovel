@@ -11,6 +11,7 @@ const transList = [
   'randsquare',
   'pixelize',
   'wipe',
+  'circle',
 ]
 
 export type LayerState = {
