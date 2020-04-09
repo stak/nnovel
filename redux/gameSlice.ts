@@ -12,6 +12,7 @@ const transList = [
   'pixelize',
   'wipe',
   'circle',
+  'radial',
 ]
 
 export type LayerState = {

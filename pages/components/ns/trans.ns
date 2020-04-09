@@ -2,6 +2,18 @@
 
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
+/trans "radial" 5000
+/waitTrans
+
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "radial" 5000 "up" 50 1
+/waitTrans
+
+@
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
 /trans "circle" 3000
 /waitTrans
 
