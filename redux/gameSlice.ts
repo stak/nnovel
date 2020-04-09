@@ -14,6 +14,7 @@ const transList = [
   'circle',
   'radial',
   'crosszoom',
+  'zoom',
 ]
 
 export type LayerState = {
