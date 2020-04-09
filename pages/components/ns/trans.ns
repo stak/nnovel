@@ -1,5 +1,19 @@
 /showBg "/img/bg1.png"
 
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "crosszoom" 3000 0.3
+/waitTrans
+
+/moveLayer 0 0 0
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "crosszoom" 2000 0.3
+/waitTrans
+
+@
+
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
 /trans "radial" 5000

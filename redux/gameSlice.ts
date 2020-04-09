@@ -13,6 +13,7 @@ const transList = [
   'wipe',
   'circle',
   'radial',
+  'crosszoom',
 ]
 
 export type LayerState = {

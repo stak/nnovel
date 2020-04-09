@@ -12,6 +12,7 @@ import { pixelizeTransition } from './pixelizeTransition'
 import { wipeTransition } from './wipeTransition'
 import { circleTransition } from './circleTransition'
 import { radialTransition } from './radialTransition'
+import { crosszoomTransition } from './crosszoomTransition'
 
 export const trans: {
   [key: string]: (sprite: Sprite, options: (number | string)[]) => Transition
@@ -27,4 +28,5 @@ export const trans: {
   wipe: wipeTransition,
   circle: circleTransition,
   radial: radialTransition,
+  crosszoom: crosszoomTransition,
 }
