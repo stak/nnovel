@@ -6,6 +6,7 @@ import { NextComponentType, NextPageContext } from 'next'
 import { LayerSetState } from '../../redux/gameSlice'
 import { trans } from './trans'
 import { Transition } from './trans/Transition'
+import { easing } from './easing'
 
 type Props = {
   Component: NextComponentType<NextPageContext, {}, any>
@@ -60,11 +61,16 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
       app.renderer.render(toInstance, texture.current)
       toInstance.renderable = false
 
-      const progress = (elapsed.current * 60 * 60) / (app.ticker.FPS * time)
+      const linearProgress = Math.min(
+        (elapsed.current * 60 * 60) / (app.ticker.FPS * time),
+        1
+      )
+
+      const progress = easing.outCubic(linearProgress)
       if (progress < 1) {
         filter.current.uniforms.progress = progress
       } else {
-        // transition end
+        // transition complete
         filter.current = undefined
         const fromInstance = (flip
           ? refB.current
