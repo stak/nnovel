@@ -14,6 +14,7 @@ import { circleTransition } from './circleTransition'
 import { radialTransition } from './radialTransition'
 import { crosszoomTransition } from './crosszoomTransition'
 import { zoomTransition } from './zoomTransition'
+import { scrollTransition } from './scrollTransition'
 
 export const trans: {
   [key: string]: (sprite: Sprite, options: (number | string)[]) => Transition
@@ -31,4 +32,5 @@ export const trans: {
   radial: radialTransition,
   crosszoom: crosszoomTransition,
   zoom: zoomTransition,
+  scroll: scrollTransition,
 }

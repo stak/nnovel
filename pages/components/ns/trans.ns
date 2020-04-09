@@ -1,5 +1,19 @@
 /showBg "/img/bg1.png"
 
+
+/readyBg "/img/bg2.jpg"
+/readyLayer 0 "/img/qwer.png" 300 0
+/trans "scroll" 1000 "right" 0 0
+/waitTrans
+
+/moveLayer 0 -400 0
+/readyBg "/img/bg1.png"
+/readyLayer 0 "/img/qwer.png" 100 0
+/trans "scroll" 1000 "right" 0 0
+/waitTrans
+
+@
+
 /readyBg "/img/bg2.jpg"
 /readyLayer 0 "/img/qwer.png" 300 0
 /trans "zoom" 3000
