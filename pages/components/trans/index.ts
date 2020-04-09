@@ -9,6 +9,7 @@ import { universalTransition } from './universalTransition'
 import { windTransition } from './windTransition'
 import { randsquareTransition } from './randsquareTransition'
 import { pixelizeTransition } from './pixelizeTransition'
+import { wipeTransition } from './wipeTransition'
 
 export const trans: {
   [key: string]: (sprite: Sprite, options: (number | string)[]) => Transition
@@ -21,4 +22,5 @@ export const trans: {
   wind: windTransition,
   randsquare: randsquareTransition,
   pixelize: pixelizeTransition,
+  wipe: wipeTransition,
 }
