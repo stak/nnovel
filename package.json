@@ -1,14 +1,15 @@
 {
-  "name": "nextscript-proto",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "nnovel",
+  "version": "0.0.1",
+  "description": "Web-based visual novel game engine built with React, Redux, PixiJS.",
+  "main": "",
+  "private": true,
   "dependencies": {
-    "@inlet/react-pixi": "^1.2.8",
-    "@reduxjs/toolkit": "^1.3.2",
+    "@inlet/react-pixi": "^1.2.12",
+    "@reduxjs/toolkit": "^1.3.4",
     "@types/lodash": "^4.14.149",
     "lodash": "^4.17.15",
-    "next": "^9.3.2",
+    "next": "^9.3.4",
     "next-redux-wrapper": "^5.0.0",
     "parsimmon": "^1.13.0",
     "pixi.js": "^5.2.1",
@@ -44,10 +45,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "run-p -s lint:*; exit 0",
-    "lint:tsc": "tsc --noEmit",
+    "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint '*/**/*.{js,ts,tsx}'"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": {
+    "name": "Shutaro Takimoto",
+    "email": "shu@tak.im",
+    "url": "https://tak.im/"
+  },
+  "license": "MIT"
 }
