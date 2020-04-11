@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Command, startScript, execScript } from '../../redux/scriptSlice'
-import { gameInit } from '../../redux/gameSlice'
-import { RootState } from '../../redux/rootReducer'
-import { commandActionCreators } from '../../redux/commandActions'
+import { Command, startScript, execScript } from '../redux/scriptSlice'
+import { gameInit } from '../redux/gameSlice'
+import { RootState } from '../redux/rootReducer'
+import { commandActionCreators } from '../redux/commandActions'
 import { NNStage } from './NNStage'
 
 type Props = {

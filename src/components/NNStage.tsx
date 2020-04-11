@@ -5,8 +5,8 @@ import { Stage } from '@inlet/react-pixi'
 
 import { NNScreen } from './NNScreen'
 import { NNTimer } from './NNTimer'
-import { RootState } from '../../redux/rootReducer'
-import { transDone, waitDone } from '../../redux/gameSlice'
+import { RootState } from '../redux/rootReducer'
+import { transDone, waitDone } from '../redux/gameSlice'
 import { NNTransition } from './NNTransition'
 
 const stageOption = {

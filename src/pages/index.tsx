@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 
-const MyStageNoSSR = dynamic(() => import('./components/Game'), {
+const MyStageNoSSR = dynamic(() => import('../components/Game'), {
   ssr: false,
 })
 

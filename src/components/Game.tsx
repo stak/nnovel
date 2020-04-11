@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { NNEngine } from './NNEngine'
-import { Command } from '../../redux/scriptSlice'
+import { Command } from '../redux/scriptSlice'
 import { nnParser } from './parser'
-import * as NNScripts from './ns'
+import * as NNScripts from '../ns'
 
 const parse = (src: string): Command[] => nnParser.script.tryParse(src)
 

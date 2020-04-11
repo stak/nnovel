@@ -10,14 +10,6 @@ const store = setupStore()
 interface MyAppProps extends AppInitialProps, ReduxWrapperAppProps {}
 
 class MyApp extends App<MyAppProps> {
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    let pageProps = {}
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
-    }
-    return { pageProps }
-  }
-
   render() {
     const { Component, pageProps } = this.props
     return (

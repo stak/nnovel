@@ -3,7 +3,7 @@ import { Container } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 import { NNLayer } from './NNLayer'
 import { NNText } from './NNText'
-import { LayerSetState } from '../../redux/gameSlice'
+import { LayerSetState } from '../redux/gameSlice'
 
 type Props = {
   state: LayerSetState

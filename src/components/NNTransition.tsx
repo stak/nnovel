@@ -3,9 +3,9 @@ import { RenderTexture, Sprite, DisplayObject } from 'pixi.js'
 import { useApp, useTick } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 
-import { LayerSetState } from '../../redux/gameSlice'
-import { trans } from './trans'
-import { Transition } from './trans/Transition'
+import { LayerSetState } from '../redux/gameSlice'
+import { trans } from '../trans'
+import { Transition } from '../trans/Transition'
 import { easing } from './easing'
 
 type Props = {
