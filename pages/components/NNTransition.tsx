@@ -66,8 +66,8 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
         1
       )
 
-      const progress = easing.outCubic(linearProgress)
-      if (progress < 1) {
+      const progress = easing.linear(linearProgress)
+      if (linearProgress < 1) {
         filter.current.uniforms.progress = progress
       } else {
         // transition complete
