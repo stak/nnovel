@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { RenderTexture, Sprite, DisplayObject } from 'pixi.js'
+import { RenderTexture, Sprite, DisplayObject, settings } from 'pixi.js'
 import { useApp, useTick } from '@inlet/react-pixi'
 import { NextComponentType, NextPageContext } from 'next'
 
@@ -62,7 +62,7 @@ export const NNTransition: NextComponentType<NextPageContext, {}, Props> = ({
       toInstance.renderable = false
 
       const linearProgress = Math.min(
-        (elapsed.current * 60 * 60) / (app.ticker.FPS * time),
+        elapsed.current / settings.TARGET_FPMS / time,
         1
       )
 
