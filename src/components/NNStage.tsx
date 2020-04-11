@@ -39,7 +39,7 @@ export const NNStage: NextComponentType<NextPageContext, {}, Props> = ({
   return (
     <Stage
       options={stageOption}
-      onClick={() => {
+      onPointerDown={() => {
         if ($wait.waitClick) {
           console.log('onClick')
           dispatch(waitDone(['click']))
