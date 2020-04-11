@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
+import { settings } from 'pixi.js'
 import { useTick } from '@inlet/react-pixi'
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   onComplete: () => void
 }
 
-const FPS = 60
+const FPS = settings.TARGET_FPMS * 1000
 
 export const NNTimer: NextComponentType<NextPageContext, {}, Props> = ({
   time,
