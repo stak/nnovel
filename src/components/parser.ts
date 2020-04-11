@@ -1,4 +1,5 @@
 import * as P from 'parsimmon'
+import { flatten } from 'lodash'
 
 function interpretEscapes(str: string) {
   const escapes: { [key: string]: string } = {
@@ -42,14 +43,14 @@ const inlineCommands: { [key: string]: {} | {}[] } = {
 }
 
 export const nnParser = P.createLanguage({
-  script: (r) => r.line.sepBy(P.newline).map((array) => array.flat()),
+  script: (r) => r.line.sepBy(P.newline).map((array) => flatten(array)),
 
   line: (r) => P.alt(r.commandLine, r.textLine),
 
   textLine: (r) =>
     P.alt(r.inlineCommand, r.text)
       .many()
-      .map((array) => array.flat()),
+      .map((array) => flatten(array)),
 
   inlineCommand: () => P.oneOf(inlineChars).map((char) => inlineCommands[char]),
 
